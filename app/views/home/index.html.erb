@@ -54,7 +54,7 @@
                         <tr>
                             <td>01/02/2015</td>
                             <td>17:08</td>
-                            <td><a id="a_select" data-toggle="modal" data-target="#select_number" href="#">9876543210</a></td>
+                            <td><a id="a_select" class="example-p-2"  href="#">9876543210</a></td>
                             <td>Puneet</td>
                             <td>Computer</td>
                             <td>Answered</td>
@@ -65,29 +65,6 @@
             </ul>
         </li>
     </ul>
-    <div class="modal fade" id="select_number" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button class="close" aria-label="Close" data-dismiss="modal" type="button">
-                    <span aria-hidden="true">×</span>
-                    </button>
-                    <h3 align="center" class="text-danger">Select a number</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="container form-horizontal col-sm-offset-4">
-                        <form action="send_sms" data-remote="true">
-                            <input type="radio" name="num" value="2854354354">2854354354 <br>
-                            <input type="radio" name="num" value="3456546755">3456546755<br>
-                            <input type="radio" name="num" value="5675657657">5675657657<br/><br/>
-                            <button id="submit" type="submit" class="btn btn-primary col-sm-1">Submit</button>   
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!--          NEW STICKLR ENDS     -->
     <script type="text/javascript">
     //        NEW STICKLR  
@@ -112,16 +89,41 @@
         tabHeight   : 34,
         tabWidth    : 32
     });
-    $("#submit").click(function(){  
-        $.ajax({  
+    
+    $("#a_select").click(function(){
+        $('#select_number').modal({
+        backdrop: 'static',
+        keyboard: false
+        },'show');
+    })   
 
-            success: function(){ 
-                $('#select_number').modal("hide");                                   
-            },
-            error:function(){
-                alert('error')
-            } 
-        })
-    })
+    $('.example-p-2').on('click', function () {
+        $.confirm({
+            title: 'A secure action',
+            content: '<form action="send_sms" data-remote="true"><input type="radio" name="num" value="2854354354">2854354354 <br><input type="radio" name="num" value="3456546755">3456546755<br><input type="radio" name="num" value="5675657657">5675657657<br/><br/></form>',
+            confirmButton: 'Proceed',
+            confirmButtonClass: 'btn-info',
+            icon: 'fa fa-question-circle',
+            animation: 'scale',
+            animationClose: 'top',
+            opacity: 0.5,
+            confirm: function () {
+                var num=$('input[type="radio"]:checked').val();
+                $.ajax({ 
+
+                    url: "/send_sms?num="+num,
+                    success: function(){ 
+                        // $('#select_number').modal("hide");   
+                        alert("selected number is"+num)                                
+                    },
+                    error:function(){
+                        alert('error')
+                    } 
+                })
+            }
+        });
+    });
+
+
 
     </script
