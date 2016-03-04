@@ -1,0 +1,127 @@
+<style type="text/css">
+    .modal-content {
+        margin: 15% auto; 
+        border: 3px solid #428bca;
+        width: 80%; 
+    }
+    .modal-header-primary {
+    background-color: #428bca;
+    }
+
+</style>
+<!--          Stickler         -->
+    <ul id="search" class="sticklr">
+        <li>
+            <a href="#" class="glyphicon glyphicon-search"></a>
+            <ul>
+                <li>
+                    <form action="http://google.com" method="GET">
+                        <input type="text" name="q" value="" placeholder="Type then press Enter.." />
+                    </form>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="glyphicon glyphicon-refresh" ></a>
+            <ul>
+                <li>
+                    <a href="http://www.google.com">This is a link</a>
+                </li>
+                <li>
+                    <a href="http://www.facebook.com">Another link</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+        <!--       New   Stickler         -->
+
+    <ul id="example-1" class="sticklr">
+        <li>
+            <a href="#">Call Log</a>
+            <ul >
+                <li>
+                    <table class="table">
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Caller ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Call Duration</th>
+                        </tr>
+
+                        <tr>
+                            <td>01/02/2015</td>
+                            <td>17:08</td>
+                            <td><a id="a_select" data-toggle="modal" data-target="#select_number" href="#">9876543210</a></td>
+                            <td>Puneet</td>
+                            <td>Computer</td>
+                            <td>Answered</td>
+                            <td>9:36</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="modal fade" id="select_number" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 align="center" class="text-danger">Select a number</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container form-horizontal col-sm-offset-4">
+                        <form action="send_sms" data-remote="true">
+                            <input type="radio" name="num" value="2854354354">2854354354 <br>
+                            <input type="radio" name="num" value="3456546755">3456546755<br>
+                            <input type="radio" name="num" value="5675657657">5675657657<br/><br/>
+                            <button id="submit" type="submit" class="btn btn-primary col-sm-1">Submit</button>   
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--          NEW STICKLR ENDS     -->
+    <script type="text/javascript">
+    //        NEW STICKLR  
+   
+    $('#example-1').sticklr({
+        menuHeight  : 20,
+        menuWidth   : 700,
+        tabHeight   : 20,
+        tabWidth    : 80,
+        showOn      : 'hover',
+        stickTo     : 'right',
+    });
+    //     NEW STICKLR ENDS
+
+    $('#search').sticklr({
+        // animate     : true,
+        menuHeight  : 20,
+        menuWidth   : 200,
+        // relativeTo  : 'bottom',  
+        // relativeGap : 90,
+        showOn      : 'hover',
+        tabHeight   : 34,
+        tabWidth    : 32
+    });
+    $("#submit").click(function(){  
+        $.ajax({  
+
+            success: function(){ 
+                $('#select_number').modal("hide");                                   
+            },
+            error:function(){
+                alert('error')
+            } 
+        })
+    })
+
+    </script
