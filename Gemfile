@@ -20,6 +20,9 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'pry'
 
+gem 'paperclip'
+gem 'paperclip-ffmpeg'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
